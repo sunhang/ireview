@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'DetailWidget.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    runApp(MyApp());
+  });
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -54,7 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
           return new Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              new Expanded(child: new _ListWidget(itemSelectedCallback: (value) {
+              new Expanded(
+                  child: new _ListWidget(itemSelectedCallback: (value) {
                 if (isLargeScreen) {
                   setState(() {});
                 } else {
