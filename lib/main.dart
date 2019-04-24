@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'DetailWidget.dart';
 
 void main() {
+  // todo 先把横屏模式给禁掉，回头查查横屏下布局的问题
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(MyApp());
