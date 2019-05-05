@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:ui';
@@ -13,83 +15,89 @@ class LinearEquation extends StatefulWidget {
   }
 }
 
-class _LinearEquationState extends State<LinearEquation> {
-  double _seekbarAValue = 65;
-  double _seekbarBValue = 50;
+class SeekbarInitalData {
+  final String title;
+  final double min;
+  final double max;
+  double current;
 
-  double _getA() {
-    // 求值范围是-10到10
-    return (_seekbarAValue - 50) / 5.0;
+  SeekbarInitalData(this.title, this.min, this.max, this.current);
+}
+
+class _LinearEquationState extends State<LinearEquation> {
+  LinkedHashMap<String, SeekbarInitalData> _coefficients =
+      new LinkedHashMap<String, SeekbarInitalData>();
+
+  _LinearEquationState() {
+    _coefficients["a"] = SeekbarInitalData("a", -10, 10, 1);
+    _coefficients["b"] = SeekbarInitalData("b", -50, 50, 0);
   }
 
-  double _getB() {
-    return _seekbarBValue - 50;
+  List<Widget> seekbars(
+      BuildContext context, List<SeekbarInitalData> initalData) {
+    List<Widget> widgets = new List<Widget>();
+
+    const int SECTION_COUNT = 100;
+
+    initalData.forEach((element) {
+      var padding = Padding(
+        padding: new EdgeInsets.only(left: 20, top: 40, right: 20, bottom: 10),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: new EdgeInsets.only(right: 10),
+              child: Text(element.title, style: TextStyle(fontSize: 20)),
+            ),
+            Expanded(
+                child: SeekBar(
+                    progresseight: 8,
+                    value: (element.current - element.min) *
+                        SECTION_COUNT /
+                        (element.max - element.min),
+                    sectionCount: SECTION_COUNT,
+                    onValueChanged: (ProgressValue value) {
+                      setState(() {
+                        element.current =
+                            value.value * (element.max - element.min) / 100 +
+                                element.min;
+                      });
+                    })),
+          ],
+        ),
+      );
+
+      widgets.add(padding);
+    });
+
+    return widgets;
   }
 
   @override
   Widget build(BuildContext context) {
     return new Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: new EdgeInsets.only(bottom: 10),
-          child: Text(
-            "y = a * x + b",
-            style: TextStyle(fontSize: 20),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: new EdgeInsets.only(bottom: 10),
+            child: Text(
+              "y = a * x + b",
+              style: TextStyle(fontSize: 20),
+            ),
           ),
-        ),
-        Padding(
-            padding: new EdgeInsets.only(bottom: 30),
-            child: Text("a: ${_getA().toStringAsFixed(1)}  b:${_getB().toStringAsFixed(1)}", style: TextStyle(fontSize: 20, color: Colors.red))),
-        new Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.width,
-          child: CustomPaint(painter: new LinearEquationPainter(_getA(), _getB())),
-        ),
-        Padding(
-          padding:
-              new EdgeInsets.only(left: 20, top: 40, right: 20, bottom: 10),
-          child: Row(
-            children: <Widget>[
-              Padding(
-                padding: new EdgeInsets.only(right: 10),
-                child: Text("a:", style: TextStyle(fontSize: 20)),
-              ),
-              Expanded(
-                  child: SeekBar(
-                      progresseight: 5,
-                      value: _seekbarAValue,
-                      sectionCount: 100,
-                      onValueChanged: (ProgressValue value) {
-                        setState(() {
-                          _seekbarAValue = value.value;
-                        });
-                      })),
-            ],
+          Padding(
+              padding: new EdgeInsets.only(bottom: 30),
+              child: Text(
+                  "a: ${_coefficients["a"].current.toStringAsFixed(1)}  b:${_coefficients["b"].current.toStringAsFixed(1)}",
+                  style: TextStyle(fontSize: 20, color: Colors.red))),
+          new Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.width,
+            child: CustomPaint(
+                painter: new LinearEquationPainter(
+                    _coefficients["a"].current, _coefficients["b"].current)),
           ),
-        ),
-        Padding(
-            padding:
-                new EdgeInsets.only(left: 20, top: 40, right: 20, bottom: 10),
-            child: Row(children: <Widget>[
-              Padding(
-                padding: new EdgeInsets.only(right: 10),
-                child: Text("b:", style: TextStyle(fontSize: 20)),
-              ),
-              Expanded(
-                  child: SeekBar(
-                progresseight: 5,
-                value: _seekbarBValue,
-                sectionCount: 100,
-                onValueChanged: (ProgressValue value) {
-                  setState(() {
-                    _seekbarBValue = value.value;
-                  });
-                },
-              )),
-            ])),
-      ],
-    );
+        ]..addAll(seekbars(context,
+            _coefficients.entries.map((entry) => entry.value).toList())));
   }
 }
 
@@ -99,7 +107,6 @@ class LinearEquationPainter extends BaseCustomPainter {
   double _b = 10;
 
   LinearEquationPainter(this._a, this._b);
-
 
   @override
   void paint(Canvas canvas, Size size) {
