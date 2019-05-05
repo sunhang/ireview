@@ -83,8 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 var titles = [
-  'He\'d have you all unravel at the',
-  'Heed not the rabble',
+  'y = a * x + b',
+  'y = a * x ^ 2 + b * x + c',
   'Sound of screams but the',
   'Who scream',
   'Revolution is coming...',
