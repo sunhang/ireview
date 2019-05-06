@@ -3,11 +3,8 @@ import 'package:flutter/services.dart';
 import 'DetailWidget.dart';
 
 void main() {
-  // todo 先把横屏模式给禁掉，回头查查横屏下布局的问题
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-    runApp(MyApp());
-  });
+  // 横屏模式禁掉是在AndroidManifest.xml中设置了 todo 后续要不要考虑横屏的布局问题
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
