@@ -23,7 +23,7 @@ List<Widget> seekbars(BuildContext context, List<SeekbarInitalData> initalData,
 
   initalData.forEach((element) {
     var padding = Padding(
-      padding: new EdgeInsets.only(left: 20, top: 40, right: 20, bottom: 10),
+      padding: new EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
       child: Row(
         children: <Widget>[
           Padding(
