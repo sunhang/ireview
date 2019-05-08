@@ -6,16 +6,16 @@ import 'package:flutter_seekbar/flutter_seekbar.dart'
 
 typedef void NotifyRefresh();
 
-class SeekbarInitalData {
+class SeekBarDataItem {
   double current;
   final String title;
   final double min;
   final double max;
 
-  SeekbarInitalData(this.title, this.min, this.max, this.current);
+  SeekBarDataItem(this.title, this.min, this.max, this.current);
 }
 
-List<Widget> seekbars(BuildContext context, List<SeekbarInitalData> initalData,
+List<Widget> seekbars(BuildContext context, List<SeekBarDataItem> initalData,
     NotifyRefresh notifyRefresh) {
   List<Widget> widgets = new List<Widget>();
 
@@ -51,22 +51,4 @@ List<Widget> seekbars(BuildContext context, List<SeekbarInitalData> initalData,
   });
 
   return widgets;
-}
-
-
-class Coefficients {
-  LinkedHashMap<String, SeekbarInitalData> _coefficients =
-      new LinkedHashMap<String, SeekbarInitalData>();
-
-  void add(String coefficient, double min, double max, double current) {
-    _coefficients[coefficient] = SeekbarInitalData(coefficient, min, max, current);
-  }
-
-  List<Widget> createSeekbars(BuildContext context, NotifyRefresh notify) {
-    return seekbars(context, _asList(), notify);
-  }
-
-  List<SeekbarInitalData> _asList() => _coefficients.entries.map((entry) => entry.value).toList();
-
-  SeekbarInitalData operator [](String key) => _coefficients[key];
 }

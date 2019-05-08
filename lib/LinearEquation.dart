@@ -8,6 +8,7 @@ import 'package:flutter_seekbar/flutter_seekbar.dart'
 
 import 'BaseCustomPainter.dart';
 import 'BaseState.dart';
+import 'base.dart';
 
 class LinearEquation extends StatefulWidget {
   @override
@@ -17,35 +18,22 @@ class LinearEquation extends StatefulWidget {
 }
 
 class _LinearEquationState extends BaseState<LinearEquation> {
-  _LinearEquationState() {
-    coefficients..add("a", -10, 10, 1)..add("b", -50, 50, 0);
-  }
+  List<SeekBarDataItem> _items = [
+      SeekBarDataItem("a", -10, 10, 1),
+      SeekBarDataItem("b", -50, 50, 0)
+    ];
+
+  _LinearEquationState() :super();
 
   @override
-  Widget build(BuildContext context) {
-    return new Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: new EdgeInsets.only(bottom: 10),
-            child: Text(
-              "y = a * x + b",
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          Padding(
-              padding: new EdgeInsets.only(bottom: 30),
-              child: Text(
-                  "a: ${coefficients["a"].current.toStringAsFixed(1)}  b:${coefficients["b"].current.toStringAsFixed(1)}",
-                  style: TextStyle(fontSize: 20, color: Colors.red))),
-          new Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.width,
-            child: CustomPaint(
-                painter: new LinearEquationPainter(
-                    coefficients["a"].current, coefficients["b"].current)),
-          ),
-        ]..addAll(createSeekbars(context)));
+  List<SeekBarDataItem> get seekBarDataItems => _items;
+
+  @override
+  String getTitle() => "y = a * x + b";
+
+  @override
+  CustomPainter createCustomPainter(BuildContext context) {
+    return new LinearEquationPainter(seekBarDataItems[0].current, seekBarDataItems[1].current);
   }
 }
 
