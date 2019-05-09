@@ -6,7 +6,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   @protected
   List<Widget> createSeekbars(BuildContext context) {
-    return seekbars(
+    return sliders(
       context,
       seekBarDataItems,
       () {
@@ -15,7 +15,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     );
   }
 
-  List<SeekBarDataItem> get seekBarDataItems;
+  List<SliderDataItem> get seekBarDataItems;
 
   String getTitle();
 

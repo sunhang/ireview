@@ -6,16 +6,16 @@ import 'package:flutter_seekbar/flutter_seekbar.dart'
 
 typedef void NotifyRefresh();
 
-class SeekBarDataItem {
+class SliderDataItem {
   double current;
   final String title;
   final double min;
   final double max;
 
-  SeekBarDataItem(this.title, this.min, this.max, this.current);
+  SliderDataItem(this.title, this.min, this.max, this.current);
 }
 
-List<Widget> seekbars(BuildContext context, List<SeekBarDataItem> initalData,
+List<Widget> sliders(BuildContext context, List<SliderDataItem> initalData,
     NotifyRefresh notifyRefresh) {
   List<Widget> widgets = new List<Widget>();
 
@@ -31,16 +31,15 @@ List<Widget> seekbars(BuildContext context, List<SeekBarDataItem> initalData,
             child: Text(element.title, style: TextStyle(fontSize: 20)),
           ),
           Expanded(
-              child: SeekBar(
-                  progresseight: 8,
+              child: Slider(
+                  min: 0,
+                  max: 100,
                   value: (element.current - element.min) *
                       SECTION_COUNT /
                       (element.max - element.min),
-                  sectionCount: SECTION_COUNT,
-                  onValueChanged: (ProgressValue value) {
+                  onChanged: (value) {
                     element.current =
-                        value.value * (element.max - element.min) / 100 +
-                            element.min;
+                        value * (element.max - element.min) / 100 + element.min;
                     notifyRefresh();
                   })),
         ],

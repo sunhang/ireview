@@ -17,14 +17,14 @@ class QuadraticEquationInOneUnknown extends StatefulWidget {
 class _QuadraticEquationInOneUnknownState
     extends BaseState<QuadraticEquationInOneUnknown> {
 
-  List<SeekBarDataItem> _items = [
-    SeekBarDataItem("a", -5, 5, 1),
-    SeekBarDataItem("b", -10, 10, 0),
-    SeekBarDataItem("c", -5, 5, 3),
+  List<SliderDataItem> _items = [
+    SliderDataItem("a", -5, 5, 1),
+    SliderDataItem("b", -10, 10, 0),
+    SliderDataItem("c", -5, 5, 3),
   ];
 
   @override
-  List<SeekBarDataItem> get seekBarDataItems => _items;
+  List<SliderDataItem> get seekBarDataItems => _items;
 
   @override
   String getTitle() => "y = a * x ^ 2 + b * x + c";

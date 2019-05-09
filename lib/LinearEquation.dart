@@ -18,15 +18,15 @@ class LinearEquation extends StatefulWidget {
 }
 
 class _LinearEquationState extends BaseState<LinearEquation> {
-  List<SeekBarDataItem> _items = [
-      SeekBarDataItem("a", -10, 10, 1),
-      SeekBarDataItem("b", -50, 50, 0)
+  List<SliderDataItem> _items = [
+      SliderDataItem("a", -10, 10, 1),
+      SliderDataItem("b", -50, 50, 0)
     ];
 
   _LinearEquationState() :super();
 
   @override
-  List<SeekBarDataItem> get seekBarDataItems => _items;
+  List<SliderDataItem> get seekBarDataItems => _items;
 
   @override
   String getTitle() => "y = a * x + b";
