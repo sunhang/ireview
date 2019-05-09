@@ -7,6 +7,8 @@ class BaseCustomPainter extends CustomPainter {
     ..color = Color.fromARGB(255, 0, 0, 0)
     ..strokeWidth = 1;
 
+  double get abstractSize => 10.0;
+
   BaseCustomPainter();
 
   @protected
@@ -23,14 +25,15 @@ class BaseCustomPainter extends CustomPainter {
 
     canvas.drawLine(p0, p1, basePaint);
 
-    for (double i = 0; i < size.width / 2; i += 40) {
+    double step = size.width / abstractSize;
+    for (double i = 0; i < size.width / 2; i += step) {
       canvas.drawLine(Offset(size.width / 2 + i, size.height / 2),
           Offset(size.width / 2 + i, size.height / 2 - 10), basePaint);
       canvas.drawLine(Offset(size.width / 2 - i, size.height / 2),
           Offset(size.width / 2 - i, size.height / 2 - 10), basePaint);
     }
 
-    for (double i = 0; i < size.height / 2; i += 40) {
+    for (double i = 0; i < size.height / 2; i += step) {
       canvas.drawLine(Offset(size.width / 2, size.height / 2 + i),
           Offset(size.width / 2 + 10, size.height / 2 + i), basePaint);
       canvas.drawLine(Offset(size.width / 2, size.height / 2 - i),
