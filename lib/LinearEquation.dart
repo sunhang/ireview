@@ -45,23 +45,6 @@ class LinearEquationPainter extends BaseCustomPainter {
   LinearEquationPainter(this._a, this._b);
 
   @override
-  void paint(Canvas canvas, Size size) {
-    super.paint(canvas, size);
+  double f(double x) => _a * x + _b;
 
-    basePaint.color = Colors.blue;
-    double y;
-    List<Offset> list = new List();
-    for (double x = -size.width / 2; x <= size.width / 2; x = x + 20) {
-      y = _a * x + _b;
-
-      list.add(new Offset(x + size.width / 2, size.height / 2 - y));
-    }
-
-    canvas.drawPoints(PointMode.polygon, list, basePaint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return this != oldDelegate;
-  }
 }

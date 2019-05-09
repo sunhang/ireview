@@ -47,29 +47,5 @@ class QuadraticEquationInOneUnknownPainter extends BaseCustomPainter {
   QuadraticEquationInOneUnknownPainter(this._a, this._b, this._c);
 
   @override
-  void paint(Canvas canvas, Size size) {
-    super.paint(canvas, size);
-
-    double abstractSize = 10.0;
-    double step = 0.01;
-    double ratio = size.width / abstractSize;
-
-    basePaint.color = Colors.blue;
-    double y;
-    List<Offset> list = new List();
-
-    for (double x = - abstractSize / 2; x <= abstractSize / 2; x = x + step) {
-      y = _a * x * x + _b * x + _c;
-
-      Offset offset = new Offset(x * ratio + size.width / 2, size.height / 2 - y * ratio);
-      list.add(offset);
-    }
-
-    canvas.drawPoints(PointMode.polygon, list, basePaint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return this != oldDelegate;
-  }
+  double f(double x) => _a * x * x + _b * x + _c;
 }

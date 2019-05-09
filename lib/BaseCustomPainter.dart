@@ -1,13 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class BaseCustomPainter extends CustomPainter {
+abstract class BaseCustomPainter extends CustomPainter {
   @protected
   Paint basePaint = new Paint()
     ..color = Color.fromARGB(255, 0, 0, 0)
     ..strokeWidth = 1;
 
   double get abstractSize => 10.0;
+
+  double get abstractStep => 0.01;
 
   BaseCustomPainter();
 
@@ -57,7 +61,7 @@ class BaseCustomPainter extends CustomPainter {
     TextSpan span = new TextSpan(
         style: new TextStyle(color: Colors.black, fontSize: 20.0), text: "O");
     TextPainter tp =
-    new TextPainter(text: span, textDirection: TextDirection.ltr);
+        new TextPainter(text: span, textDirection: TextDirection.ltr);
     tp.layout();
     tp.paint(canvas, new Offset(size.width / 2 - tp.width, size.height / 2));
 
@@ -65,7 +69,7 @@ class BaseCustomPainter extends CustomPainter {
     TextSpan spanX = new TextSpan(
         style: new TextStyle(color: Colors.black, fontSize: 20.0), text: "X");
     TextPainter tpX =
-    new TextPainter(text: spanX, textDirection: TextDirection.ltr);
+        new TextPainter(text: spanX, textDirection: TextDirection.ltr);
     tpX.layout();
     tpX.paint(canvas,
         new Offset(size.width - tpX.width, size.height / 2 + arrowSize));
@@ -74,7 +78,7 @@ class BaseCustomPainter extends CustomPainter {
     TextSpan spanY = new TextSpan(
         style: new TextStyle(color: Colors.black, fontSize: 20.0), text: "Y");
     TextPainter tpY =
-    new TextPainter(text: spanY, textDirection: TextDirection.ltr);
+        new TextPainter(text: spanY, textDirection: TextDirection.ltr);
     tpY.layout();
     tpY.paint(canvas, new Offset(size.width / 2 - tpY.width - arrowSize, 0));
   }
@@ -87,7 +91,38 @@ class BaseCustomPainter extends CustomPainter {
 
     canvas.clipRect(rect);
     _drawCoordinateAxis(canvas, size);
+    drawFunction(canvas, size);
   }
+
+  void drawFunction(Canvas canvas, Size size) {
+    double ratio = size.width / abstractSize;
+
+    basePaint.color = Colors.blue;
+
+    List<Offset> list = generateAbstractOffset(abstractSize)
+        .map((it) => Offset(
+            it.dx * ratio + size.width / 2, size.height / 2 - it.dy * ratio))
+        .toList();
+
+    canvas.drawPoints(PointMode.polygon, list, basePaint);
+  }
+
+  List<Offset> generateAbstractOffset(double abstractSize) {
+    double y;
+    List<Offset> list = new List();
+
+    double step = abstractStep;
+    for (double x = -abstractSize / 2; x <= abstractSize / 2; x = x + step) {
+      y = f(x);
+
+      Offset offset = new Offset(x, y);
+      list.add(offset);
+    }
+
+    return list;
+  }
+
+  double f(double x) => x;
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
