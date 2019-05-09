@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'InverseProportionalFunction.dart';
 import 'LinearEquation.dart';
 import 'QuadraticEquationInOneUnknown.dart';
 
@@ -20,6 +21,9 @@ class DetailWidget extends StatelessWidget {
         return new LinearEquation();
       case 1:
         return new QuadraticEquationInOneUnknown();
+      case 2:
+        // 反比例函数
+        return new InverseProportionalFunction();
       default:
         return null;
     }
