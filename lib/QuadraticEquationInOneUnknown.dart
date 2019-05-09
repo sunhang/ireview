@@ -24,7 +24,7 @@ class _QuadraticEquationInOneUnknownState
   ];
 
   @override
-  List<SliderDataItem> get seekBarDataItems => _items;
+  List<SliderDataItem> get sliderDataItems => _items;
 
   @override
   String getTitle() => "y = a * x ^ 2 + b * x + c";
@@ -32,9 +32,9 @@ class _QuadraticEquationInOneUnknownState
   @override
   CustomPainter createCustomPainter(BuildContext context) {
     return new QuadraticEquationInOneUnknownPainter(
-        seekBarDataItems[0].current,
-        seekBarDataItems[1].current,
-        seekBarDataItems[2].current);
+        sliderDataItems[0].current,
+        sliderDataItems[1].current,
+        sliderDataItems[2].current);
   }
 }
 

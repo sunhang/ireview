@@ -21,7 +21,7 @@ class _InverseProportionalFunction
   ];
 
   @override
-  List<SliderDataItem> get seekBarDataItems => _items;
+  List<SliderDataItem> get sliderDataItems => _items;
 
   @override
   String getTitle() => "y = k / x";
@@ -29,7 +29,7 @@ class _InverseProportionalFunction
   @override
   CustomPainter createCustomPainter(BuildContext context) {
     return new InverseProportionalFunctionPainter(
-        seekBarDataItems[0].current);
+        sliderDataItems[0].current);
   }
 }
 

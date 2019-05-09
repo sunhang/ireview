@@ -26,14 +26,14 @@ class _LinearEquationState extends BaseState<LinearEquation> {
   _LinearEquationState() :super();
 
   @override
-  List<SliderDataItem> get seekBarDataItems => _items;
+  List<SliderDataItem> get sliderDataItems => _items;
 
   @override
   String getTitle() => "y = a * x + b";
 
   @override
   CustomPainter createCustomPainter(BuildContext context) {
-    return new LinearEquationPainter(seekBarDataItems[0].current, seekBarDataItems[1].current);
+    return new LinearEquationPainter(sliderDataItems[0].current, sliderDataItems[1].current);
   }
 }
 

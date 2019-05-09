@@ -8,14 +8,14 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   List<Widget> createSeekbars(BuildContext context) {
     return sliders(
       context,
-      seekBarDataItems,
+      sliderDataItems,
       () {
         setState(() {});
       },
     );
   }
 
-  List<SliderDataItem> get seekBarDataItems;
+  List<SliderDataItem> get sliderDataItems;
 
   String getTitle();
 
@@ -24,7 +24,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   String _lastestCoefficients() {
     var buffer = StringBuffer();
 
-    seekBarDataItems.forEach((it) {
+    sliderDataItems.forEach((it) {
       buffer
         ..write(it.title)
         ..write(":")
