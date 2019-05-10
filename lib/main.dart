@@ -84,11 +84,11 @@ var titles = [
   'y = a * x ^ 2 + b * x + c',
   'y = k / x',
   'y = a * sin(b * x)',
-  'Revolution is coming...',
-  'Revolution, they...',
+  'y = a ^ x',
+  'y = log x',
 ];
 
-// 一次函数，二次函数，反比例函数，三角函数，幂函数，指数函数，对数函数，反函数
+// 一次函数，二次函数，反比例函数，三角函数，指数函数，对数函数
 
 typedef Null ItemSelectedCallback(int value);
 

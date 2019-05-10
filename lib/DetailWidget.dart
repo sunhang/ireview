@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'ExponentialFunction.dart';
 import 'InverseProportionalFunction.dart';
 import 'LinearEquation.dart';
+import 'LogFunction.dart';
 import 'QuadraticEquationInOneUnknown.dart';
 import 'SinFunction.dart';
 
@@ -27,6 +29,10 @@ class DetailWidget extends StatelessWidget {
         return new InverseProportionalFunction();
       case 3:
         return new SinFunction();
+      case 4:
+        return new ExponentialFunction();
+      case 5:
+        return new LogFunction();
       default:
         return null;
     }
