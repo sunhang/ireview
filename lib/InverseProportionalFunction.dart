@@ -39,56 +39,12 @@ class InverseProportionalFunctionPainter extends BaseCustomPainter {
 
   InverseProportionalFunctionPainter(this._k);
 
+
   @override
-  void drawFunction(Canvas canvas, Size size) {
-    double ratio = size.width / abstractSize;
-
-    basePaint.color = Colors.blue;
-
-    List<Offset> list = generateAbstractOffsetWithNegativeX(abstractSize)
-        .map((it) => Offset(
-        it.dx * ratio + size.width / 2, size.height / 2 - it.dy * ratio))
-        .toList();
-
-    canvas.drawPoints(PointMode.polygon, list, basePaint);
-
-    List<Offset> list1 = generateAbstractOffsetWithPositiveX(abstractSize)
-        .map((it) => Offset(
-        it.dx * ratio + size.width / 2, size.height / 2 - it.dy * ratio))
-        .toList();
-
-    canvas.drawPoints(PointMode.polygon, list1, basePaint);
-  }
-
-  List<Offset> generateAbstractOffsetWithNegativeX(double abstractSize) {
-    double y;
-    List<Offset> list = new List();
-
-    double step = abstractStep;
-    for (double x = -abstractSize / 2; x < 0; x = x + step) {
-      y = f(x);
-
-      Offset offset = new Offset(x, y);
-      list.add(offset);
-    }
-
-    return list;
-  }
-
-  List<Offset> generateAbstractOffsetWithPositiveX(double abstractSize) {
-    double y;
-    List<Offset> list = new List();
-
-    double step = abstractStep;
-    for (double x = 0.01; x < abstractSize / 2; x = x + step) {
-      y = f(x);
-
-      Offset offset = new Offset(x, y);
-      list.add(offset);
-    }
-
-    return list;
-  }
+  List<XValues> get xValuesList => [
+    XValues(-abstractSize / 2, -0.01, abstractStep),
+    XValues(0.01, abstractSize / 2, abstractStep),
+  ];
 
   double f(double x) => _k / x;
 }

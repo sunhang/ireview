@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'base.dart';
+
 abstract class BaseCustomPainter extends CustomPainter {
   @protected
   Paint basePaint = new Paint()
@@ -99,20 +101,24 @@ abstract class BaseCustomPainter extends CustomPainter {
 
     basePaint.color = Colors.blue;
 
-    List<Offset> list = generateAbstractOffset(abstractSize)
-        .map((it) => Offset(
-            it.dx * ratio + size.width / 2, size.height / 2 - it.dy * ratio))
-        .toList();
+    xValuesList.forEach((xValues){
+      List<Offset> list = generateAbstractOffset(xValues)
+          .map((it) => Offset(
+          it.dx * ratio + size.width / 2, size.height / 2 - it.dy * ratio))
+          .toList();
 
-    canvas.drawPoints(PointMode.polygon, list, basePaint);
+      canvas.drawPoints(PointMode.polygon, list, basePaint);
+    });
   }
 
-  List<Offset> generateAbstractOffset(double abstractSize) {
+  List<XValues> get xValuesList =>
+      [XValues(-abstractSize / 2, abstractSize / 2, abstractStep)];
+
+  List<Offset> generateAbstractOffset(XValues xValues) {
     double y;
     List<Offset> list = new List();
 
-    double step = abstractStep;
-    for (double x = -abstractSize / 2; x <= abstractSize / 2; x = x + step) {
+    for (double x = xValues.start; x <= xValues.end; x = x + xValues.step) {
       y = f(x);
 
       Offset offset = new Offset(x, y);

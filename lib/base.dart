@@ -4,6 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_seekbar/flutter_seekbar.dart'
     show SeekBar, ProgressValue;
 
+class XValues {
+  final double start;
+  final double end;
+  final double step;
+
+  const XValues(this.start, this.end, this.step);
+}
+
+
 typedef void NotifyRefresh();
 
 class SliderDataItem {
@@ -23,7 +32,7 @@ List<Widget> sliders(BuildContext context, List<SliderDataItem> initalData,
 
   initalData.forEach((element) {
     var padding = Padding(
-      padding: new EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
+      padding: new EdgeInsets.only(left: 20, top: 15, right: 20, bottom: 15),
       child: Row(
         children: <Widget>[
           Padding(

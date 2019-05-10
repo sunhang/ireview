@@ -32,21 +32,8 @@ class _LogFunctionState
 }
 
 class LogFunctionPainter extends BaseCustomPainter {
-
-  List<Offset> generateAbstractOffset(double abstractSize) {
-    double y;
-    List<Offset> list = new List();
-
-    double step = abstractStep;
-    for (double x = 0.01; x < abstractSize / 2; x = x + step) {
-      y = f(x);
-
-      Offset offset = new Offset(x, y);
-      list.add(offset);
-    }
-
-    return list;
-  }
-
   double f(double x) => log(x);
+
+  @override
+  List<XValues> get xValuesList => [XValues(0.01, abstractSize / 2, abstractStep)];
 }
