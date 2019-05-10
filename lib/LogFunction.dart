@@ -33,22 +33,6 @@ class _LogFunctionState
 
 class LogFunctionPainter extends BaseCustomPainter {
 
-  LogFunctionPainter();
-
-  @override
-  void drawFunction(Canvas canvas, Size size) {
-    double ratio = size.width / abstractSize;
-
-    basePaint.color = Colors.blue;
-
-    List<Offset> list = generateAbstractOffset(abstractSize)
-        .map((it) => Offset(
-        it.dx * ratio + size.width / 2, size.height / 2 - it.dy * ratio))
-        .toList();
-
-    canvas.drawPoints(PointMode.polygon, list, basePaint);
-  }
-
   List<Offset> generateAbstractOffset(double abstractSize) {
     double y;
     List<Offset> list = new List();
