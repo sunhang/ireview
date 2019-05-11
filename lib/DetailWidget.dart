@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ExponentialFunction.dart';
-import 'InverseProportionalFunction.dart';
-import 'LinearEquation.dart';
-import 'LogFunction.dart';
-import 'QuadraticEquationInOneUnknown.dart';
-import 'SinFunction.dart';
+import 'functions.dart';
 
 class DetailWidget extends StatelessWidget {
   final int _data;
@@ -19,20 +14,13 @@ class DetailWidget extends StatelessWidget {
   }
 
   StatefulWidget _createWidget(int index) {
-    switch(index) {
-      case 0:
-        return new LinearEquation();
-      case 1:
-        return new QuadraticEquationInOneUnknown();
-      case 2:
-        // 反比例函数
-        return new InverseProportionalFunction();
-      case 3:
-        return new SinFunction();
-      case 4:
-        return new ExponentialFunction();
-      case 5:
-        return new LogFunction();
+    switch (index) {
+      case 0: return createLinearEquation();
+      case 1: return createQuadraticEquationInOneUnknown();
+      case 2: return createInverseProportionalFunction();
+      case 3: return createSinFunction();
+      case 4: return createExponentialFunction();
+      case 5: return createLogFunction();
       default:
         return null;
     }
