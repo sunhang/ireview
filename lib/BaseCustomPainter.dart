@@ -93,16 +93,16 @@ abstract class BaseCustomPainter extends CustomPainter {
 
     canvas.clipRect(rect);
     _drawCoordinateAxis(canvas, size);
-    drawFunction(canvas, size);
+    _drawFunction(canvas, size);
   }
 
-  void drawFunction(Canvas canvas, Size size) {
+  void _drawFunction(Canvas canvas, Size size) {
     double ratio = size.width / abstractSize;
 
     basePaint.color = Colors.blue;
 
     xValuesList.forEach((xValues){
-      List<Offset> list = generateAbstractOffset(xValues)
+      List<Offset> list = _generateAbstractOffset(xValues)
           .map((it) => Offset(
           it.dx * ratio + size.width / 2, size.height / 2 - it.dy * ratio))
           .toList();
@@ -114,7 +114,7 @@ abstract class BaseCustomPainter extends CustomPainter {
   List<XValues> get xValuesList =>
       [XValues(-abstractSize / 2, abstractSize / 2, abstractStep)];
 
-  List<Offset> generateAbstractOffset(XValues xValues) {
+  List<Offset> _generateAbstractOffset(XValues xValues) {
     double y;
     List<Offset> list = new List();
 
