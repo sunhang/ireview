@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'BaseCustomPainter.dart';
-import 'BaseState.dart';
+import 'package:ireview/base/BaseCustomPainter.dart';
+import 'package:ireview/base/BaseState.dart';
 
 class XValues {
   final double start;

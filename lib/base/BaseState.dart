@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'base.dart';
+import 'package:ireview/base/base.dart';
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
 

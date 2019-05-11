@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'base.dart';
+import 'package:ireview/base/base.dart';
 
 abstract class BaseCustomPainter extends CustomPainter {
   @protected

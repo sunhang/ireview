@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'base.dart';
+import 'package:ireview/base/base.dart';
 
 // 一元一次方程
 StatefulWidget createLinearEquation() {
