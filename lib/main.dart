@@ -38,45 +38,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isLargeScreen;
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
           title: new Text('i复习'),
         ),
-        body: new OrientationBuilder(builder: (context, orientation) {
-          print("width:${MediaQuery.of(context).size.width}");
-          //判断屏幕宽度
-          if (MediaQuery.of(context).size.width > 600) {
-            isLargeScreen = true;
-          } else {
-            isLargeScreen = false;
-          }
-
-          return new Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              new Expanded(
-                  child: new _ListWidget(itemSelectedCallback: (value) {
-                if (isLargeScreen) {
-                  setState(() {});
-                } else {
-                  Navigator.of(context)
-                      .push(new MaterialPageRoute(builder: (context) {
-                    return new DetailWidget(value);
-                  }));
-                }
-              })),
-              isLargeScreen
-                  ? new Expanded(child: new DetailWidget(1))
-                  : new Container()
-            ],
-          );
+        body: new _ListWidget(itemSelectedCallback: (value) {
+          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+            return new DetailWidget(value);
+          }));
         }));
-  } //是否是大屏幕
-
+  }
 }
 
 var titles = [
